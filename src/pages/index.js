@@ -1,5 +1,4 @@
 import * as React from "react"
-import 'bootstrap/dist/css/bootstrap.min.css'
 
 import { 
   Container, 
@@ -8,11 +7,14 @@ import {
   Nav,
   Navbar,
   NavDropdown,
+  Jumbotron,
 } from 'react-bootstrap';
+import 'bootstrap/dist/css/bootstrap.min.css'
 
-function Navbar() {
+
+function Navigation() {
   return (
-    <Navbar bg="light" expand="lg">
+    <Navbar bg="light" expand="xl">
       <Container>
         <Navbar.Brand href="#home">React-Bootstrap</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -21,7 +23,7 @@ function Navbar() {
             <Nav.Link href="#home">Home</Nav.Link>
             <Nav.Link href="#link">Link</Nav.Link>
             <NavDropdown title="Dropdown" id="basic-nav-dropdown">
-              <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
+              <NavDropdown.Item href="hello">Action</NavDropdown.Item>
               <NavDropdown.Item href="#action/3.2">
                 Another action
               </NavDropdown.Item>
@@ -38,17 +40,24 @@ function Navbar() {
   );
 }
 
-const IndexPage = () => {
+function PageContent(props) {
   return (
     <Container>
       <Row>
-        <Col>1 of 1</Col>
-        <Col>1 of 1</Col>
-        <Col>1 of 1</Col>
-        <Col>1 of 1</Col>
-
+        <Col>
+          Hello world! {props.route}
+        </Col>
       </Row>
     </Container>
+  )
+}
+
+const IndexPage = () => {
+  return (
+    <div>
+      <Navigation/>
+      <PageContent route = "index"/>
+    </div>
   )
 }
 
