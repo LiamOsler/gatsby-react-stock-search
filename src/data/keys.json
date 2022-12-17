@@ -1,0 +1,14 @@
+{
+    "symbol": "Symbol",
+    "name": "Name",
+    "lastsale": "Last Sale",
+    "netchange": "Net Change",
+    "pctchange": "Percent Change",
+    "volume": "Volume",
+    "marketCap": "Market Capitalization",
+    "country": "Country",
+    "ipoyear": "IPO Year",
+    "industry": "Industry",
+    "sector": "Sector",
+    "url": "URL"
+}
