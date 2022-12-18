@@ -23,6 +23,7 @@ import Footer from "../components/Footer";
 
 
 function BestStocks(){
+  const [listLength, setListLength] = useState(11);
   return (
       <Row>
           <Col xs={12} className="mt-4">
@@ -33,7 +34,7 @@ function BestStocks(){
               .sort(function (a, b){
                 return (b.pctchange.replace("%", "")) - (a.pctchange.replace("%", "")) ;
               })
-              .slice(0, 12)
+              .slice(0, listLength)
               .map((stock) => {
                 return(
                 <Col sm={6} md={6} lg={3} className="mt-4">
@@ -41,10 +42,9 @@ function BestStocks(){
                     <Card.Body className="flex-column">
                       <Card.Title className="text-white"><h1>{stock.symbol}</h1></Card.Title>
                       <Card.Subtitle className="mb-2 text-white">
+                        <h2>{stock.lastsale}</h2>
                       </Card.Subtitle>
                       <Card.Text>
-                        <i class="bi bi-diagram-2 text-white"></i>
-                        <h2>{stock.lastsale}</h2>
                         <h3>+{stock.pctchange}</h3>
                       </Card.Text>
                     </Card.Body>
@@ -53,6 +53,21 @@ function BestStocks(){
                 )
             })
           }
+          <Col sm={6} md={6} lg={3} className="mt-4">
+            <Card className="h-100 d-flex text-white bg-dark">
+              <Card.Body className="flex-column">
+                <Card.Text>
+                <h3 className = "text-center">Top Returns for Today</h3>
+                <div className="d-grid gap-2">
+                  <Button variant="light" size="lg"
+                    onClick={() => setListLength(listLength+4)}>
+                    See More
+                  </Button>
+                </div>
+                </Card.Text>
+              </Card.Body>
+            </Card>
+          </Col>
       </Row>
   )
 }
@@ -76,9 +91,9 @@ function WorstStocks(){
                     <Card.Body className="flex-column">
                       <Card.Title className="text-white"><h1>{stock.symbol}</h1></Card.Title>
                       <Card.Subtitle className="mb-2 text-white">
+                        <h2>{stock.lastsale}</h2>
                       </Card.Subtitle>
                       <Card.Text>
-                        <h2>{stock.lastsale}</h2>
                         <h3>{stock.pctchange}</h3>
                       </Card.Text>
                     </Card.Body>
@@ -118,9 +133,9 @@ function HighVolumeStocks(){
                     <Card.Body className="flex-column">
                       <Card.Title className="text-white"><h1>{stock.symbol}</h1></Card.Title>
                       <Card.Subtitle className="mb-2 text-white">
+                        <h2>{stock.lastsale}</h2>
                       </Card.Subtitle>
                       <Card.Text>
-                        <h2>{stock.lastsale}</h2>
                         <h3>{stock.pctchange}</h3>
                       </Card.Text>
                     </Card.Body>
@@ -137,9 +152,9 @@ function HighVolumeStocks(){
 function StockSearch() {
   const [searchTerm, setSearchTerm] = useState('');
   return (
+    <Container>
     <Row>
-      <Row>
-        <Col xs={12} className="mt-4">
+      <Col xs={12} className="mt-4">
             <InputGroup className="mb-3">
               <Form.Control
                 placeholder="Find a Stock"
@@ -152,8 +167,8 @@ function StockSearch() {
               </Button>
             </InputGroup>
         </Col>
-      </Row>
-      <Row>
+        </Row>
+        <Row>
         {
           stockList
           .filter(
@@ -192,7 +207,7 @@ function StockSearch() {
         })
         }
       </Row>
-    </Row>
+    </Container>
   )
 }
 
@@ -234,19 +249,19 @@ const Page = () => {
           <Col>
           <Row>
             <Col>
-              <a href="#index" className = "text-white"
+              <a href="#about" className = "text-white"
                 onClick={() => setPage('index')}>
                 What is StockVision?
               </a>
             </Col>
             <Col>
-              <a href="#link" className = "text-white"
+              <a href="#how" className = "text-white"
                 onClick={() => setPage('other')}>
                 How does it work?
               </a>
             </Col>
             <Col>
-              <a href="#link" className = "text-white"
+              <a href="#cost" className = "text-white"
                 onClick={() => setPage('cost')}>
                 How much does it cost?
               </a>
@@ -256,9 +271,7 @@ const Page = () => {
           <IntroContent page={page} />
         </Row>
       </Container>
-      <Container className = "mt-4">
         <StockSearch/>
-      </Container>
       <Container>
         <BestStocks/>
       </Container>
