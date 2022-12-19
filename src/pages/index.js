@@ -13,6 +13,8 @@ import {
   InputGroup,
   Form,
   Button,
+  Modal,
+  CloseButton
 } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 
@@ -24,6 +26,12 @@ import Footer from "../components/Footer";
 
 function BestStocks(){
   const [listLength, setListLength] = useState(11);
+  const [modalShow, setModalShow] = useState(false);
+  const [modalStock, setModalStock] = useState();
+
+  const handleClose = () => setModalShow(false);
+  const handleShow = () => setModalShow(true);
+
   return (
       <Row>
           <Col xs={12} className="mt-4">
@@ -37,7 +45,7 @@ function BestStocks(){
               .slice(0, listLength)
               .map((stock) => {
                 return(
-                <Col sm={6} md={6} lg={3} className="mt-4">
+                <Col sm={6} md={6} lg={3} className="mt-4" onClick={handleShow} role='button'>
                   <Card className="h-100 d-flex text-white bg-success">
                     <Card.Body className="flex-column">
                       <Card.Title className="text-white"><h1>{stock.symbol}</h1></Card.Title>
@@ -53,7 +61,7 @@ function BestStocks(){
                 )
             })
           }
-          <Col sm={6} md={6} lg={3} className="mt-4">
+          <Col sm={6} md={6} lg={3} className="mt-4" >
             <Card className="h-100 d-flex text-white bg-dark">
               <Card.Body className="flex-column">
                 <Card.Text>
@@ -68,6 +76,21 @@ function BestStocks(){
               </Card.Body>
             </Card>
           </Col>
+          <Modal show={modalShow} onHide={handleClose} fullscreen = {true}>
+            <Modal.Header className = "bg-dark text-white">
+              <Modal.Title>Modal heading</Modal.Title>
+              <CloseButton variant="white" onClick={handleClose}/>
+            </Modal.Header>
+            <Modal.Body className = "bg-dark">Woohoo, you're reading this text in a modal!</Modal.Body>
+            <Modal.Footer className = "bg-dark">
+              <Button variant="secondary" onClick={handleClose}>
+                Close
+              </Button>
+              <Button variant="primary" onClick={handleClose}>
+                Save Changes
+              </Button>
+            </Modal.Footer>
+          </Modal>
       </Row>
   )
 }
